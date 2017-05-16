@@ -1,0 +1,12 @@
+{
+  "name": "gambit",
+  "version": "1.0.0",
+  "description": "Implementation of a ERC20 Token",
+  "main": "truffle.js",
+  "repository": "https://github.com/3months/gambit",
+  "author": "Klaus Hott Vidal <klahott@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "truffle": "^3.2.2"
+  }
+}
