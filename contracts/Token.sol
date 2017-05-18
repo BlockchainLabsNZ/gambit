@@ -2,12 +2,12 @@ pragma solidity ^0.4.4;
 
 import "./ERC20.sol";
 
-// This is just a simple example of a coin-like contract.
-// It is not standards compatible and cannot be expected to talk to other
-// coin/token contracts. If you want to create a standards-compliant
-// token, see: https://github.com/ConsenSys/Tokens. Cheers!
-
 contract Token is ERC20 {
+  function () {
+    // if ether is sent to this address, send it back.
+    throw;
+  }
+
   // Balances for each account
   mapping(address => uint) balances;
 
@@ -17,16 +17,19 @@ contract Token is ERC20 {
   // Owner of this contract
   address public owner;
 
+  // The total token supply
+  uint _totalSupply = 1000000;
+
   // Constructor
   function Token() {
     owner = msg.sender;
-    balances[owner] = 1000000;
+    balances[owner] = _totalSupply;
   }
 
   // Get the total token supply
   /// @return Total amount of tokens
   function totalSupply() constant returns (uint totalSupply) {
-
+    return _totalSupply;
   }
 
   // Get the account balance of another account with address _owner
