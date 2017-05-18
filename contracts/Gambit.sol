@@ -7,17 +7,25 @@ contract Gambit is Token {
   uint8  public decimals = 8;
   string public symbol   = 'GAM';
   string public version  = '1.0.0';
-  uint _totalBurnt = 0;
+  uint internal _totalBurnt = 0;
 
   // This notifies clients about the amount burnt
-  event Burn(address indexed from, uint value);
+  event Burn(address indexed _from, uint _value);
 
   // Constructor
   function Gambit(uint _initialAmount) {
     _totalSupply = _initialAmount;
+    owner = msg.sender;
+    balances[owner] = _totalSupply;
   }
 
-  // Get the total token supply
+  // Get the total of token burnt
+  /// @return Total amount of burned tokens
+  function totalBurnt() constant returns (uint totalBurnt) {
+    return _totalBurnt;
+  }
+
+  // Only the Owner of the contract can burn tokens.
   /// @param _value The amount of token to be burned
   /// @return Whether the burning was successful or not
   function burn(uint _value) returns (bool success) {

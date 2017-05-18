@@ -18,13 +18,7 @@ contract Token is ERC20 {
   address public owner;
 
   // The total token supply
-  uint _totalSupply = 1000000;
-
-  // Constructor
-  function Token() {
-    owner = msg.sender;
-    balances[owner] = _totalSupply;
-  }
+  uint internal _totalSupply;
 
   // Get the total token supply
   /// @return Total amount of tokens
