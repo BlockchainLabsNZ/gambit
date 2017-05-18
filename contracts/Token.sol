@@ -49,7 +49,7 @@ contract Token is ERC20 {
         && _value > 0
         && balances[_to] + _value > balances[_to]) {
       balances[msg.sender] -= _value;
-      balances[_to] += _value;
+      balances[_to]        += _value;
       Transfer(msg.sender, _to, _value);
       return true;
     } else {
@@ -69,8 +69,8 @@ contract Token is ERC20 {
          && _value > 0
          && balances[_to] + _value > balances[_to]) {
       balances[_from] -= _value;
+      balances[_to]   += _value;
       allowed[_from][msg.sender] -= _value;
-      balances[_to] += _value;
       Transfer(_from, _to, _value);
       return true;
     } else {
