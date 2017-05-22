@@ -6,7 +6,12 @@
   "repository": "https://github.com/3months/gambit",
   "author": "Klaus Hott Vidal <klahott@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "yarn truffle compile",
+    "deploy": "yarn truffle migrate",
+    "test": "yarn truffle test"
+  },
   "dependencies": {
-    "truffle": "^3.2.2"
+    "truffle": "^3.2.4"
   }
 }
