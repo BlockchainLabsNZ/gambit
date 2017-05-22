@@ -12,7 +12,6 @@ contract("Token", function(accounts) {
   });
 
   // TRANSERS
-  // normal transfers without approvals.
   it("transfers: should transfer 1000000 to accounts[1] with accounts[0] having 1000000", function(done) {
     var ctr;
     Token.new(1000000, {from: accounts[0]}).then(function(result) {

@@ -14,9 +14,6 @@ contract Token is ERC20 {
   // Owner of account approves the transfer of an amount to another account
   mapping(address => mapping (address => uint)) allowed;
 
-  // Owner of this contract
-  address public owner;
-
   // The total token supply
   uint internal _totalSupply;
 
