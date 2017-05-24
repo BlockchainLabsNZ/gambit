@@ -1,4 +1,4 @@
-pragma solidity ^0.4.4;
+pragma solidity ^0.4.11;
 
 import "./Token.sol";
 
@@ -29,21 +29,6 @@ contract Gambit is Token {
   /// @return Total amount of burned tokens
   function totalBurnt() constant returns (uint totalBurnt) {
     return _totalBurnt;
-  }
-
-  // Only the Owner of the contract can issue tokens.
-  /// @param _value The amount of token to be issued
-  /// @return Whether the issuance was successful or not
-  function issue(uint _value) returns (bool success) {
-    if (msg.sender == owner
-        && _value > 0) {
-      balances[owner] += _value;
-      _totalSupply    += _value;
-      Issuance(msg.sender, _value);
-      return true;
-    } else {
-      return false;
-    }
   }
 
   // Only the Owner of the contract can burn tokens.

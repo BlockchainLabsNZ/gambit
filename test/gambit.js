@@ -19,41 +19,6 @@ contract("Gambit", function(accounts) {
     }).catch(done);
   });
 
-  // ISSUANCE
-  it("issuance: owner of the contract is able to issue tokens", function(done) {
-    var ctr;
-    Gambit.new(1000000, {from: accounts[0]}).then(function(result) {
-      ctr = result;
-      return ctr.issue(100, {from: accounts[0]});
-    }).then(function(result) {
-      var logs = result.logs;
-      assert.equal(logs[0].event, 'Issuance');
-      assert.equal(logs[0].args._from, accounts[0]);
-      assert.strictEqual(logs[0].args._value.toNumber(), 100);
-      return ctr.balanceOf.call(accounts[0]);
-    }).then(function(result) {
-      assert.strictEqual(result.toNumber(), 1000100);
-      return ctr.totalSupply.call();
-    }).then(function(result) {
-      assert.strictEqual(result.toNumber(), 1000100);
-      done();
-    }).catch(done);
-  });
-
-  it("issuance: non owner of the contract is unable to issue tokens", function(done) {
-    var ctr;
-    Gambit.new(1000000, {from: accounts[0]}).then(function(result) {
-      ctr = result;
-      return ctr.issue.call(100, {from: accounts[1]});
-    }).then(function(result) {
-      assert.isFalse(result);
-      return ctr.totalSupply.call();
-    }).then(function(result) {
-      assert.strictEqual(result.toNumber(), 1000000);
-      done();
-    }).catch(done);
-  });
-
   // BURNING
   it("burning: owner of the contract is able to burn tokens", function(done) {
     var ctr;
