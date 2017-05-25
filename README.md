@@ -2,40 +2,70 @@
 
 This repo contains Solidity smart contract code to issue simple, ERC20-compliant tokens on Ethereum.
 
-The ERC20 contract is the interface for the standard proposed in issue [#20](https://github.com/ethereum/EIPs/issues/20).  
+The ERC20.sol contract is the interface for the standard proposed in issue [#20](https://github.com/ethereum/EIPs/issues/20).  
 
-HumanStandardToken.sol is an example of a token that has optional extras fit for your issuing your own tokens, to be mainly used by other humans. It includes:  
+The base is Token.sol which ONLY implements the core ERC20 standard functionality.
 
-1. Initial Finite Supply (upon creation one specifies how much is minted).  
-2. In the absence of a token registry: Optional Decimal, Symbol & Name.  
-3. Optional approveAndCall() functionality to notify a contract if an approval() has occurred.  
+Gambit.sol is an implementation with all of the extra functionalityexample of a token that has optional extras fit for your issuing your own tokens, to be mainly used by other humans. It includes:  
 
-There is a set of tests written for the HumanStandardToken.sol using the Truffle framework to do so.
+1. Initial Finite Supply (upon creation one specifies how much is minted).
+2. Ability to Burn/Issue Tokens. (only by the owner of the Contract)
 
-Standards allows other contract developers to easily incorporate your token into their application (governance, exchanges, games, etc). It will be updated as often as possible.  
+There is a set of tests written for the Gambit.sol using the Truffle framework to do so.
+
+Standards allows other contract developers to easily incorporate your token into their application.
+
+## Develoment Environment
+
+The project is built using [Truffle 3.2.4](http://truffleframework.com) and, to make sure that everybody involved runs tests and compiles using the same packages, we rely on [yarn](https://yarnpkg.com/en/) to handle the packages.
+
+```
+yarn install
+```
+
+To have a clean a standard version of a blockchain environment we will be using [this](https://github.com/b9lab/truffle-vagrant-env) vagrant configuration to run a brand new Virtual Machine with all required libraries for developing in solidity.
+Please install [Vagrant](https://www.vagrantup.com) and make sure is working before running the following code.
+
+```
+git clone git@github.com:b9lab/truffle-vagrant-env.git
+cd truffle-vagrant-env
+vagrant up
+```
+
+This will download the packages necessary for a the development of DAPPS, run the VM and forward the standard ports to it.
+
+  - HTTP Server
+    - 8000
+  - Ethereum client standard port
+    - 8545
+  - IPFS
+    - 4001
+    - 5001
+    - 8080
+
+It will also link the folder `~/DAPPS` of your local machine to `/home/vagrant/DAPPS`. This way it can have multiple projects running against the same environment.
+
+All of this configuration can be changed on the `Vagrantfile`
+
+Once the VM is up and running we need to run an Ethereum Client on it.
+For development and testing purposes we recommend to use `testrpc`.
+
+```
+vagrant ssh
+testrpc
+```
 
 ## Testing
 
-```npm install```
+The Project contains multiple test scenarios dedicated to check the proper behaviour of the code in normal and edge cases.
 
-For getting truffle-hdwallet-provider. Solidity tests have to still be written.
+```
+yarn test
+```
 
-Uses Truffle 3.x.
+The scenarios so far are simple enough to be written in Javascript using the Truffle testing API which provides all of the steps to prepare, publish and interact with contracts on the blockchain while leaving the assertions of the results to the node environment.
 
-## ethpm
+However there are some caveats to using this approach.
 
-This is published under tokens at ethpm.
-
-### Pull requests are welcome! Please keep standards discussions to the EIP repos.
-
-> "You get a token, you get a token, everyone gets a token!" - Token the 3rd: the fun gerbil.  
-
-### Licensed under MIT.  
-
-This code is licensed under MIT.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  - function overloading is not supported by javascript.
+  - testing for numbers over 10^15 since Javascript's big number library only ensures consistency till then.
