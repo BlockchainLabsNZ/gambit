@@ -15,9 +15,6 @@ contract Gambit is Token {
   // Triggered when tokens are burnt.
   event Burn(address indexed _from, uint _value);
 
-  // Triggered when tokens are burnt.
-  event Issuance(address indexed _from, uint _value);
-
   // Constructor
   function Gambit(uint _initialAmount) {
     _totalSupply = _initialAmount;
