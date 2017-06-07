@@ -147,9 +147,9 @@ On the contract tab click on `DEPLOY NEW CONTRACT`.
 
 Make sure that the `SOLIDITY CONTRACT SOURCE CODE` is active.
 
-> Since the Mist Wallet doesn't support `import` statements a Mist ready contract is provided in this project. `contracts/GambitMist.sol`
+> Since the Mist Wallet doesn't support `import` statements a Mist ready contract is provided in this project. `mist/Gambit.sol`
 
-Copy the contents of `contracts/GambitMist.sol` into the textarea. The mist wallet will compile the contract and calculate an approximate amount of gas needed. It will also ask which Contract will be the one deployed, please choose `Gambit`.
+Copy the contents of `mist/Gambit.sol` into the textarea. The mist wallet will compile the contract and calculate an approximate amount of gas needed. It will also ask which Contract will be the one deployed, please choose `Gambit`.
 
 Once Gambit is chosen, please provide the initial amount of Tokens to be created.
 
