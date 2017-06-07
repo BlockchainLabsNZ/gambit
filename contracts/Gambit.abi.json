@@ -74,6 +74,19 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "changeOwnership",
+    "outputs": [],
+    "payable": false,
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "decimals",
@@ -130,6 +143,19 @@
       {
         "name": "balance",
         "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
       }
     ],
     "payable": false,
@@ -206,12 +232,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "name": "_initialAmount",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [],
     "payable": false,
     "type": "constructor"
   },

@@ -15,6 +15,28 @@ There is a set of tests written for the Gambit.sol using the Truffle framework t
 
 Standards allows other contract developers to easily incorporate your token into their application.
 
+## Interaction
+
+The Contract is deployed in `0xdf0b7310588741cad931de88bc6c4f687cdf0e16` on the Ethereum Classic Network.
+
+The friendliest way to interact with it is to go to https://classicetherwallet.com/#contracts and there, on **Contract Address** input, paste `0xdf0b7310588741cad931de88bc6c4f687cdf0e16`, and on the **ABI / JSON Interface** textarea paste the contents of  [contracts/Gambit.abi.json](/contracts/Gambit.abi.json).
+
+Clicking on the **Access** will display the available functions on a select box. Most functions are described on the [ERC20](https://github.com/ethereum/EIPs/issues/20) description plus a few where added as a requirement.
+
+  - **name** will always respond 'Gambit'
+  - **decimals** will always respond 8
+  - **symbol** will always respond 'GAM'
+  - **version** will always respond '1.0.0'
+  - **owner** will respond with the address that currently holds the Contract.
+  - **changeOwnership** makes possible to transfer the ownership to another address.
+    - Use with caution since if it's given to another contract that doesn't know how to interact with Gambit, ownership will be lost forever.
+    - Only executable by the owner.
+  - **burn** will eliminate Tokens from the total supply
+    - Only executable by the owner.
+    - Will only burn tokens held by the owner.
+    - Tokens burnt are not recoverable.
+  - **totalBurnt** the amount of tokens burnt by the owner.
+
 ## Develoment Environment
 
 The project is built using [Truffle 3.2.4](http://truffleframework.com) and, to make sure that everybody involved runs tests and compiles using the same packages, we rely on [yarn](https://yarnpkg.com/en/) to handle the packages.

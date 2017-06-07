@@ -4,7 +4,7 @@ contract("Gambit", function(accounts) {
   // CREATION
   it("creation: test correct setting of vanity information", function(done) {
     var ctr;
-    Gambit.new(1000000, { from: accounts[0] })
+    Gambit.new({ from: accounts[0] })
       .then(function(result) {
         ctr = result;
         return ctr.name.call();
@@ -27,7 +27,7 @@ contract("Gambit", function(accounts) {
   // BURNING
   it("burning: owner of the contract is able to burn tokens", function(done) {
     var ctr;
-    Gambit.new(1000000, { from: accounts[0] })
+    Gambit.new({ from: accounts[0] })
       .then(function(result) {
         ctr = result;
         return ctr.totalBurnt.call();
@@ -44,11 +44,11 @@ contract("Gambit", function(accounts) {
         return ctr.balanceOf.call(accounts[0]);
       })
       .then(function(result) {
-        assert.strictEqual(result.toNumber(), 999900);
+        assert.strictEqual(result.toNumber(), 259999999999900);
         return ctr.totalSupply.call();
       })
       .then(function(result) {
-        assert.strictEqual(result.toNumber(), 999900);
+        assert.strictEqual(result.toNumber(), 259999999999900);
         return ctr.totalBurnt.call();
       })
       .then(function(result) {
@@ -60,13 +60,15 @@ contract("Gambit", function(accounts) {
 
   it("burning: owner can only burn it's own tokens.", function(done) {
     var ctr;
-    Gambit.new(1000000, { from: accounts[0] })
+    Gambit.new({ from: accounts[0] })
       .then(function(result) {
         ctr = result;
-        return ctr.transfer(accounts[1], 500000, { from: accounts[0] });
+        return ctr.transfer(accounts[1], 250000000000000, {
+          from: accounts[0]
+        });
       })
       .then(function(result) {
-        return ctr.burn.call(600000, { from: accounts[0] });
+        return ctr.burn.call(50000000000000, { from: accounts[0] });
       })
       .then(function(result) {
         assert.isFalse(result);
@@ -77,7 +79,7 @@ contract("Gambit", function(accounts) {
 
   it("burning: owner can only burn it's own tokens.", function(done) {
     var ctr;
-    Gambit.new(1000000, { from: accounts[0] })
+    Gambit.new({ from: accounts[0] })
       .then(function(result) {
         ctr = result;
         return ctr.burn.call(0, { from: accounts[0] });

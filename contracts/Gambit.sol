@@ -14,8 +14,8 @@ contract Gambit is Token, Owned {
   event Burn(address indexed _from, uint _value);
 
   // Constructor
-  function Gambit(uint _initialAmount) {
-    _totalSupply = _initialAmount;
+  function Gambit() {
+    _totalSupply = 260000000000000;
     balances[owner] = _totalSupply;
   }
 
