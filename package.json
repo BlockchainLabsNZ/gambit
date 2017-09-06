@@ -12,6 +12,6 @@
     "test": "yarn truffle test"
   },
   "dependencies": {
-    "truffle": "^3.2.4"
+    "truffle": "^3.4.9"
   }
 }
