@@ -10,9 +10,6 @@ contract Gambit is Token, Owned {
   string public constant version  = '1.0.0';
   uint256 internal _totalBurnt    = 0;
 
-  // Triggered when tokens are burnt.
-  event Burn(address indexed _from, uint256 _value);
-
   // Constructor
   function Gambit() {
     _totalSupply = 260000000000000;
@@ -35,7 +32,7 @@ contract Gambit is Token, Owned {
     balances[msg.sender] -= _value;
     _totalSupply         -= _value;
     _totalBurnt          += _value;
-    Burn(msg.sender, _value);
+    Transfer(msg.sender, 0x0, _value);
     return true;
   }
 }

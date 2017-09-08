@@ -15,8 +15,12 @@ contract("Gambit", function(accounts) {
     let ctr = await Gambit.new({ from: accounts[0] });
     assert.strictEqual((await ctr.totalBurnt.call()).toNumber(), 0);
     let logs = (await ctr.burn(100, { from: accounts[0] })).logs;
-    assert.equal(logs[0].event, "Burn");
+    assert.equal(logs[0].event, "Transfer");
     assert.equal(logs[0].args._from, accounts[0]);
+    assert.equal(
+      logs[0].args._to,
+      "0x0000000000000000000000000000000000000000"
+    );
     assert.strictEqual(logs[0].args._value.toNumber(), 100);
     assert.strictEqual(
       (await ctr.balanceOf.call(accounts[0])).toNumber(),
